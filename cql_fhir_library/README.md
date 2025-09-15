@@ -8,4 +8,4 @@ This option uses two industry standards, FHIR Clinical Reasoning and CQL, to kee
 
 ## Sample Resources
 - [measles_sample.cql]()
-- [measles_fhir_library.json]()
+- [measles_fhir_library.json](https://github.com/mshgithub/reportable_condition_rules/blob/main/cql_fhir_library/measles_fhir_library.json)

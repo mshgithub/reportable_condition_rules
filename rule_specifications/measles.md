@@ -117,6 +117,7 @@ The patient record being evaluated contains evidence of:
 ---
 
 \* This criterion can be timeboxed in the RCKMS authoring tool. [More on timeboxing](https://www.rckms.org/rckms-timeboxing/)
+
 \*\* Not Implemented in RCKMS (reporter types not available)
 
 ---

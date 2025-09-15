@@ -7,5 +7,5 @@ This option uses two industry standards, FHIR Clinical Reasoning and CQL, to kee
 \[ eICR CDA \] ==> \[ CDA-to-FHIR Conversion \] ==> \[ CQL-enabled Rules Engine \] ==> \[ Reportability Determination \]
 
 ## Sample Resources
-- [measles_sample.cql]()
+- [measles_sample.cql](https://github.com/mshgithub/reportable_condition_rules/blob/main/cql_fhir_library/measles_sample.cql)
 - [measles_fhir_library.json](https://github.com/mshgithub/reportable_condition_rules/blob/main/cql_fhir_library/measles_fhir_library.json)

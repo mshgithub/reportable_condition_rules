@@ -1,0 +1,180 @@
+{
+  "rules": {
+    "MeaslesDiagnosisOrActiveProblem": {
+      "and": [
+        {
+          "or": [
+            { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.127" } },
+            { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.126" } },
+            {
+              "and": [
+                { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.127" } },
+                { "==": [ { "var": "Condition.clinicalStatus" }, "active" ] }
+              ]
+            },
+            {
+              "and": [
+                { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.126" } },
+                { "==": [ { "var": "Condition.clinicalStatus" }, "active" ] }
+              ]
+            }
+          ]
+        },
+        { "notImplemented": "Encounter/Problem observation effective date within timebox" }
+      ]
+    },
+
+    "SuspectedMeasles": {
+      "and": [
+        { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.1436" } },
+        { "notImplemented": "Encounter/Problem observation effective date within timebox" }
+      ]
+    },
+
+    "RashAny": {
+      "or": [
+        { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.668" } },
+        { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.669" } },
+        {
+          "and": [
+            { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.668" } },
+            { "==": [ { "var": "Condition.clinicalStatus" }, "active" ] }
+          ]
+        },
+        {
+          "and": [
+            { "exists": { "Condition": "2.16.840.1.113762.1.4.1146.669" } },
+            { "==": [ { "var": "Condition.clinicalStatus" }, "active" ] }
+          ]
+        }
+      ]
+    },
+
+    "RashAndLabIgMOrIgG": {
+      "and": [
+        { "var": "RashAny" },
+        {
+          "or": [
+            {
+              "exists": {
+                "Observation": "2.16.840.1.113762.1.4.1146.299",
+                "valueSet": "2.16.840.1.113762.1.4.1146.272"
+              }
+            },
+            {
+              "exists": {
+                "Observation": "2.16.840.1.113762.1.4.1146.818",
+                "valueSet": "2.16.840.1.113762.1.4.1146.272"
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+    "RashAndEpiLink": {
+      "and": [
+        { "var": "RashAny" },
+        {
+          "or": [
+            { "notImplemented": "Exposure to Measles (SNOMED)" },
+            { "notImplemented": "Exposure to Measles (ICD10CM)" },
+            { "notImplemented": "Contact with measles case" },
+            { "notImplemented": "Risk group membership" },
+            { "notImplemented": "Resides in endemic area" },
+            { "notImplemented": "Recent travel" }
+          ]
+        }
+      ]
+    },
+
+    "LabDetectionCulture": {
+      "or": [
+        {
+          "exists": {
+            "Observation": "2.16.840.1.113762.1.4.1146.296",
+            "valueSet": [
+              "2.16.840.1.113762.1.4.1146.272",
+              "2.16.840.1.113762.1.4.1146.292",
+              "2.16.840.1.113762.1.4.1146.295"
+            ]
+          }
+        },
+        {
+          "exists": {
+            "Observation": "2.16.840.1.113762.1.4.1146.1041",
+            "valueSet": "2.16.840.1.113762.1.4.1146.292"
+          }
+        }
+      ]
+    },
+
+    "LabDetectionNucleicAcid": {
+      "or": [
+        {
+          "exists": {
+            "Observation": "2.16.840.1.113762.1.4.1146.297",
+            "valueSet": [
+              "2.16.840.1.113762.1.4.1146.272",
+              "2.16.840.1.113762.1.4.1146.292",
+              "2.16.840.1.113762.1.4.1146.295"
+            ]
+          }
+        },
+        {
+          "exists": {
+            "Observation": "2.16.840.1.113762.1.4.1146.994",
+            "valueSet": "2.16.840.1.113762.1.4.1146.292"
+          }
+        }
+      ]
+    },
+
+    "LabDetectionIgM": {
+      "exists": {
+        "Observation": "2.16.840.1.113762.1.4.1146.299",
+        "valueSet": [
+          "2.16.840.1.113762.1.4.1146.272",
+          "2.16.840.1.113762.1.4.1146.292",
+          "2.16.840.1.113762.1.4.1146.295"
+        ]
+      }
+    },
+
+    "LabTestOrderedCulture": {
+      "or": [
+        { "exists": { "ProcedureRequest": "2.16.840.1.113762.1.4.1146.296" } },
+        { "notImplemented": "Culture panel" }
+      ]
+    },
+
+    "LabTestOrderedNucleicAcid": {
+      "or": [
+        { "exists": { "ProcedureRequest": "2.16.840.1.113762.1.4.1146.297" } },
+        { "exists": { "ProcedureRequest": "2.16.840.1.113762.1.4.1146.759" } }
+      ]
+    },
+
+    "LabTestOrderedAntigen": {
+      "or": [
+        { "exists": { "ProcedureRequest": "2.16.840.1.113762.1.4.1146.298" } },
+        { "notImplemented": "Antigen panel" }
+      ]
+    }
+  },
+
+  "reportableMeasles": {
+    "or": [
+      { "var": "MeaslesDiagnosisOrActiveProblem" },
+      { "var": "SuspectedMeasles" },
+      { "var": "RashAndLabIgMOrIgG" },
+      { "var": "RashAndEpiLink" },
+      { "var": "LabDetectionCulture" },
+      { "var": "LabDetectionNucleicAcid" },
+      { "var": "LabDetectionIgM" },
+      { "var": "LabTestOrderedCulture" },
+      { "var": "LabTestOrderedNucleicAcid" },
+      { "var": "LabTestOrderedAntigen" }
+    ]
+  }
+}

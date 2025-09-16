@@ -418,5 +418,111 @@ THEN Report
 
 ---
 
+## Optional Logic Rules
+
+### Koplik Spots (for Measles)
+
+> **NOTE:** Timeboxing can be applied. Portions not implemented shown in gray.
+
+```text
+IF
+(
+    (Diagnosis of [VS: Koplik Spots (SNOMED)]
+     OR
+     Diagnosis of [VS: Koplik Spots (ICD10CM)]) -- Not implemented
+    AND
+    Encounter diagnosis effective date is within the timebox window
+)
+OR
+(
+    ((Problem list entry of [VS: Koplik Spots (SNOMED)] AND status = ACTIVE)
+     OR
+     (Problem list entry of [VS: Koplik Spots (ICD10CM)] AND status = ACTIVE)) -- Not implemented
+    AND
+    Problem observation effective date is within the timebox window
+)
+THEN Report
+```
+
+---
+
+### Detection of Measles Virus Antigen (any method)
+
+```text
+IF
+    Lab result with test name [VS: Measles (Antigen)]
+    AND
+    (Result value in [VS: Positive Lab Result Value]
+     OR
+     Result value in [VS: Measles (Organism/Substance in Results)]
+     OR
+     Interpretation in [VS: Abnormal Interpretation])
+THEN Report
+```
+
+---
+
+### Fever (≥ 38°C / ≥ 100.4°F) **AND**
+
+(Lab test ordered for IgM antibody **OR** Detection of 4-fold rise in IgG titer)
+
+> **NOTE:** Some portions not currently implemented.
+
+```text
+IF
+(
+    Diagnosis of [VS: Fever (SNOMED)] OR
+    Diagnosis of [VS: Fever (ICD10CM)] OR
+    (Problem list entry of [VS: Fever (SNOMED)] AND status = ACTIVE) OR
+    (Problem list entry of [VS: Fever (ICD10CM)] AND status = ACTIVE) OR
+    (Vital sign [VS: Body Temperature] AND (Temp ≥ 38°C OR ≥ 100.4°F))
+)
+AND
+(
+    (Lab test order: [VS: Measles (IgM Antibody)]
+     OR
+     Lab test order: [VS: Measles (IgM Antibody Test Panels)])
+    OR
+    (Detection of 4-fold increase in IgG antibody titer – NEED TO CREATE RULE)
+    OR
+    (Lab result [VS: IgG Antibody Ratio in Serum] AND value ≤ 1/4) -- Not implemented
+)
+THEN Report
+```
+
+---
+
+### Fever (≥ 38°C / ≥ 100.4°F) **AND Epidemiologic Link**
+
+(E.g., Exposure, Increased Risk, Contact, Risk Group, Endemic Area, Travel)
+
+> **NOTE:** Some portions not currently implemented.
+
+```text
+IF
+(
+    Diagnosis of [VS: Fever (SNOMED)] OR
+    Diagnosis of [VS: Fever (ICD10CM)] OR
+    (Problem list entry of [VS: Fever (SNOMED)] AND status = ACTIVE) OR
+    (Problem list entry of [VS: Fever (ICD10CM)] AND status = ACTIVE) OR
+    (Vital sign [VS: Body Temperature] AND (Temp ≥ 38°C OR ≥ 100.4°F))
+)
+AND
+(
+    (Diagnosis or active problem of [VS: Exposure to Measles (SNOMED/ICD10CM)]) -- ICD10CM not implemented
+    OR
+    (Diagnosis or active problem of [VS: Increased Risk for Exposure (SNOMED/ICD10CM)]) -- ICD10CM not implemented
+    OR
+    (Contact with diagnosed Measles case = TRUE) -- Not implemented
+    OR
+    (Member of risk group during outbreak = TRUE) -- Not implemented
+    OR
+    (Resides in endemic/outbreak area = TRUE) -- Not implemented
+    OR
+    (Travel in past 21 days to endemic/outbreak area = TRUE) -- Not implemented
+)
+THEN Report
+```
+
 
 

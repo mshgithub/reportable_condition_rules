@@ -1,3 +1,5 @@
+-- CQL for Measles v5 20250228
+
 library MeaslesReporting version '1.0.0'
 
 using FHIR version '4.0.1'
@@ -9,16 +11,47 @@ codesystem "ICD10CM": 'http://hl7.org/fhir/sid/icd-10-cm'
 codesystem "LOINC": 'http://loinc.org'
 
 -- ValueSets
-valueset "Measles (SNOMED)": '[VS: Measles (Disorders) (SNOMED)]'
-valueset "Measles (ICD10CM)": '[VS: Measles (Disorders) (ICD10CM)]'
-valueset "Suspected Measles (SNOMED)": '[VS: Measles [Suspected] (Disorders) (SNOMED)]'
-valueset "Rash (SNOMED)": '[VS: Rash (SNOMED)]'
-valueset "Rash (ICD10CM)": '[VS: Rash (ICD10CM)]'
-valueset "Measles IgM Test": '[VS: Measles (Tests for measles virus IgM Antibody)]'
-valueset "Measles IgG Test": '[VS: Measles (Tests for measles virus IgG Antibody [Ratio] in Serum)]'
-valueset "Positive Lab Result": '[VS: Present or Positive Lab Result Value]'
-valueset "Organism/Substance Results": '[VS: Measles (Organism or Substance in Lab Results)]'
-valueset "Abnormal Interpretation": '[VS: Abnormal Interpretation of an Observation]'
+-- Clinical (Diagnoses, Problems, Symptoms, and Clinical Findings)
+valueset "Measles (Disorders) (SNOMED)": '2.16.840.1.113762.1.4.1146.127'
+valueset "Measles (Disorders) (ICD10CM)": '2.16.840.1.113762.1.4.1146.126'
+valueset "Measles [Suspected] (Disorders) (SNOMED)": '2.16.840.1.113762.1.4.1146.1436'
+-- valueset "Measles [Suspected] (Disorders) (ICD10CM)": 'No codes available'
+valueset "Measles (Koplik Spots) (Disorders) (SNOMED)": '2.16.840.1.113762.1.4.1146.51'
+-- valueset "Measles (Koplik Spots) (ICD10CM)": 'No codes available'
+valueset "Rash (SNOMED)": '2.16.840.1.113762.1.4.1146.668'
+valueset "Rash (ICD10CM)": '2.16.840.1.113762.1.4.1146.669'
+valueset "Fever (SNOMED)": '2.16.840.1.113762.1.4.1146.670'
+valueset "Fever (ICD10CM)": '2.16.840.1.113762.1.4.1146.671'
+valueset "Body Temperature (Vital Sign)": '2.16.840.1.113762.1.4.1146.1306'
+
+-- Laboratory Test Names that are Organism or Substance Specific
+valueset "Culture and Identification Method)": '2.16.840.1.113762.1.4.1146.296'
+valueset "Measles (Tests for measles virus Nucleic Acid)": '2.16.840.1.113762.1.4.1146.297'
+valueset "Measles (Tests for measles virus Antigen)": '2.16.840.1.113762.1.4.1146.298'
+valueset "Measles (Tests for measles virus IgM Antibody)": '2.16.840.1.113762.1.4.1146.299'
+valueset "Measles (Tests for measles virus IgG Antibody [Ratio] in Serum)": '2.16.840.1.113762.1.4.1146.818'
+
+-- Laboratory Test Panel Names
+-- valueset "Measles (Test Panels for Measles virus by Culture and Identification Method)": 'No codes available'
+valueset "Measles (Test Panels for measles virus Nucleic Acid)": '2.16.840.1.113762.1.4.1146.759'
+-- valueset "Measles (Test Panels for Measles virus Antigen)": 'No codes available'
+valueset "Measles (Test Panels for Measles virus IgM Antibody)": '2.16.840.1.113762.1.4.1146.369'
+
+-- Laboratory Test Names that are NOT Organism or Substance Specific
+valueset "Organisms (Tests by Culture and Identification)": '2.16.840.1.113762.1.4.1146.1041'
+valueset "Organisms (Tests by Unspecified Method)": '2.16.840.1.113762.1.4.1146.1040'
+valueset "Organisms (Tests for Nucleic Acid)": '2.16.840.1.113762.1.4.1146.994'
+
+-- Laboratory (Result Values, Abnormal Interpretation, Specimen Type, or Status)
+valueset "Measles (Organism or Substance in Lab Results)": '2.16.840.1.113762.1.4.1146.292'
+valueset "Present or Positive Lab Result Value": '2.16.840.1.113762.1.4.1146.272'
+valueset "Abnormal Interpretation of an Observation": '2.16.840.1.113762.1.4.1146.295'
+
+-- Epidemiological Criteria (Implemented through presence of Diagnoses/Problems)
+valueset "Exposure to Measles (SNOMED)": '2.16.840.1.113762.1.4.1146.2341'
+-- valueset "Exposure to Measles (ICD10CM)": 'No codes available'
+valueset "Increased Risk for Exposure to Measles (SNOMED)": '2.16.840.1.113762.1.4.1146.2342'
+-- valueset "Increased Risk for Exposure to Measles (ICD10CM)": 'No codes available'
 
 -- Context
 context Patient

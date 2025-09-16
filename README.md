@@ -12,5 +12,5 @@ This project includes prototypes of the following approaches:
 
 | Approach | Description |
 | -------- | ----------- |
-| [CQL + FHIR](https://github.com/mshgithub/reportable_condition_rules/tree/main/prototypes/cql_fhir) |  |
-| [JSON Logic](https://github.com/mshgithub/reportable_condition_rules/tree/main/prototypes/json_logic) |  |
+| [CQL + FHIR](https://github.com/mshgithub/reportable_condition_rules/tree/main/prototypes/cql_fhir) | Encode the rule logic in CQL and attach it to a FHIR Library resource to enable execution engines to evaluate the rule. |
+| [JSON Logic](https://github.com/mshgithub/reportable_condition_rules/tree/main/prototypes/json_logic) | Use JSON Logic, which has interpreters in many languages, to express the rules. |

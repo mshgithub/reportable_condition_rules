@@ -6,3 +6,11 @@ All samples in this project use the rule specification for measles found here: [
 
 ## Background
 We are exploring options for leveraging the national US health information exchange infrastructure to improve the quality, delivery, and value of public health data, beginning with electronic case reporting.
+
+## Prototypes
+This project includes prototypes of the following approaches:
+
+| Approach | Description |
+| -------- | ----------- |
+| [CQL + FHIR](https://github.com/mshgithub/reportable_condition_rules/tree/main/prototypes/cql_fhir) |  |
+| [JSON Logic](https://github.com/mshgithub/reportable_condition_rules/tree/main/prototypes/json_logic) |  |
